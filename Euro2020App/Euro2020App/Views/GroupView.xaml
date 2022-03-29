@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Euro2020App.Views.GroupView"
+             xmlns:views="clr-namespace:Euro2020App.Views"
+             Title="Euro 2020 Groups">
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Margin="10">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               Color="Red"/>
+
+            <CollectionView ItemsSource="{Binding Items}"
+                            SelectedItem="{Binding SelectedItem}"
+                            SelectionMode="Single" 
+                            SelectionChangedCommand="{Binding GoToDetailsCommand}"
+                            SelectionChangedCommandParameter="{x:Type views:GroupDetailView}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Name}" 
+                                   TextColor="DarkBlue"
+                                   FontSize="Large"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

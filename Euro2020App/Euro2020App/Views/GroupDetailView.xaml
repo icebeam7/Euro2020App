@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Euro2020App.Views.GroupDetailView"
+             xmlns:views="clr-namespace:Euro2020App.Views"
+             Title="Teams">
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Margin="10">
+            <Label Text="{Binding CurrentItem.Name}"
+                   FontSize="Large"
+                   TextColor="DarkGreen"
+                   FontAttributes="Bold"/>
+
+            <Button Text="Print Group Details"
+                    Command="{Binding PrintCommand}"
+                    BackgroundColor="Orange"
+                    TextColor="White"
+                    CornerRadius="20"/>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               Color="Red"/>
+
+            <CollectionView ItemsSource="{Binding Items}"
+                            SelectedItem="{Binding SelectedItem}"
+                            SelectionMode="None" 
+                            SelectionChangedCommand="{Binding GoToDetailsCommand}"
+                            SelectionChangedCommandParameter="{x:Type views:GroupDetailView}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding FK_Country.FlagUrl}"
+                                   WidthRequest="150"
+                                   Aspect="AspectFit"/>
+
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding FK_Country.Name}" 
+                                   VerticalOptions="Center"
+                                   TextColor="DarkBlue"
+                                   FontSize="Large"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
